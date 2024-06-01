@@ -5,14 +5,17 @@ You are a data engineer at a data analytics consulting company. You have been as
 ## Objectives
 create a streaming data pipe by performing these steps:
 
-Start a MySQL Database server.
-Create a table to hold the toll data.
-Start the Kafka server.
-Install the Kafka python driver.
-Install the MySQL python driver.
-Create a topic named toll in kafka.
-Download streaming data generator program.
-Customize the generator program to steam to toll topic.
-Download and customise streaming data consumer.
-Customize the consumer program to write into a MySQL database table.
-Verify that streamed data is being collected in the database table.
+   <ul>
+        <li>Start a MySQL Database server.</li>
+        <li>Create a table to hold the toll data.</li>
+        <li>Start the Kafka server.</li>
+        <li>Install the Kafka Python driver.</li>
+        <li>Install the MySQL Python driver.</li>
+        <li>Create a topic named <code>toll</code> in Kafka.</li>
+        <li>Download the streaming data generator program.</li>
+        <li>Customize the generator program to stream data to the <code>toll</code> topic.</li>
+        <li>Download and customize the streaming data consumer.</li>
+        <li>Customize the consumer program to write data into the MySQL database table.</li>
+        <li>Verify that the streamed data is being collected in the database table.</li>
+    </ul>
+
