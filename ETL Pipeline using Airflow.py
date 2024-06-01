@@ -32,21 +32,21 @@ unzip_data = BashOperator(
     dag= dag,
 )
 
-# define the tasks to update
+# Task to extract data from CSV
 extract_data_from_csv = BashOperator(
     task_id= 'extract_data_from_csv',
     bash_command= 'cut -d"," -f1-4 < /home/project/airflow/dags/finalassignment/vehicle-data.csv > /home/project/airflow/dags/finalassignment/csv_data.csv',
     dag= dag,
 )
 
-# define the tasks 1.5
+# Task to extract data from TSV
 extract_data_from_tsv = BashOperator(
     task_id= 'extract_data_from_tsv',
     bash_command= 'cut -f5-7 < /home/project/airflow/dags/finalassignment/tollplaza-data.tsv > /home/project/airflow/dags/finalassignment/tsv_data.csv',
     dag= dag,
 )
 
-# define the tasks 1.6
+# Task to extract data from fixed-width file
 extract_data_from_fixed_file = BashOperator(
     task_id= 'extract_data_from_fixed_file',
     bash_command= 'cut -c 59-68 < /home/project/airflow/dags/finalassignment/payment-data.txt > /home/project/airflow/dags/finalassignment/fixed_width_data.csv',
@@ -54,7 +54,7 @@ extract_data_from_fixed_file = BashOperator(
 )
 
 
-# define the tasks 1.7
+# Task to consolidate data into a single CSV file
 consolidate_data = BashOperator(
     task_id= 'consolidate_data',
     bash_command= 'paste /home/project/airflow/dags/finalassignment/csv_data.csv /home/project/airflow/dags/finalassignment/tsv_data.csv /home/project/airflow/dags/finalassignment/fixed_width_data.csv > /home/project/airflow/dags/finalassignment/extracted_data.csv',
@@ -62,7 +62,7 @@ consolidate_data = BashOperator(
 )
 
 
-# define the tasks 1.8
+# transform data
 Transform_data = BashOperator(
     task_id= 'Transform_data',
     #bash_command= f"awk 'BEGIN{FS=OFS=","} {split($4, a, "\t"); a[1]=toupper(a[1]); $4=a[1]; for(i=2; i<=length(a); i++) $4=$4"\t"a[i]; print $0}' /home/project/airflow/dags/finalassignment/extracted_data.csv > /home/project/airflow/dags/finalassignment/staging/transformed-data.csv",
@@ -75,4 +75,5 @@ Transform_data = BashOperator(
     dag= dag,
 )
 
+#define task pipeline
 unzip_data >> extract_data_from_csv >> extract_data_from_tsv >> extract_data_from_fixed_file >> consolidate_data >> Transform_data
